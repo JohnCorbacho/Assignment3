@@ -10,9 +10,9 @@ static int find_best_fit(int request_size){
 		current_addr += (memory[current_addr]//size
 						+ 4/*metadata*/); //next block/hole
 		if(current_addr > n-1)//out of bound
-			return -1;//request failed!
+			return -1;//reques t failed!
 	}
-	int best_hole_addr = current_addr;
+	int first_hole_addr = current_addr;
 	//find the best hole whose size is not less than request_size
 	while(-memory[current_addr] < request_size + 5){
 		if(-memory[current_addr] > best_whole_size){
@@ -20,9 +20,9 @@ static int find_best_fit(int request_size){
 			best_whole_size = -memory[current_addr];
 		}
 		//Leave at-least 5 bytes room for the remaining hole
-		number_of_examined_holes++;
+		number_of_examined_holes++
 		current_addr = memory[current_addr+2];//next hole
-		if(current_addr == best_hole_addr)//no hole is large enough
+		if(current_addr == first_hole_addr)//no hole is large enough
 			return -1;//request failed!
 	}
 	return best_whole;//Address of the best hole whose size is appropriate!
