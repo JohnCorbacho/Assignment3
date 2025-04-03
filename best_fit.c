@@ -20,7 +20,7 @@ static int find_best_fit(int request_size){
 			best_whole_size = -memory[current_addr];
 		}
 		//Leave at-least 5 bytes room for the remaining hole
-		number_of_examined_holes++
+		number_of_examined_holes++;
 		current_addr = memory[current_addr+2];//next hole
 		if(current_addr == first_hole_addr)//no hole is large enough
 			return -1;//request failed!
